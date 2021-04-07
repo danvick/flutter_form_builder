@@ -419,6 +419,11 @@ class _FormBuilderTypeAheadState<T>
   @override
   void reset() {
     super.reset();
-    _typeAheadController.text = initialValue?.toString();
+    if (widget.valueTransformer != null) {
+      _typeAheadController.text =
+          widget.valueTransformer(initialValue)?.toString();
+    } else {
+      _typeAheadController.text = initialValue?.toString();
+    }
   }
 }
